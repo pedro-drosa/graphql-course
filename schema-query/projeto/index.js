@@ -1,5 +1,21 @@
 import { ApolloServer, gql } from 'apollo-server';
 
+const users = [
+  {
+    id: 1, name: 'Anakin Skywalker', email: 'anakin@skywalker.com', age: 26,
+  },
+  {
+    id: 2, name: 'Obi-Wan Kenobi', email: 'obi-Wan@Kenobi.com', age: 36,
+  },
+  {
+    id: 3, name: 'Luke Skywalker', email: 'luke@skywalker.com', age: 19,
+  },
+  {
+    id: 4, name: 'Han Solo', email: 'han@solo.com', age: 19,
+  },
+
+];
+
 const typeDefs = gql`
 # Novo tipo scalar
 scalar Date
@@ -26,6 +42,7 @@ scalar Date
     loggedInUser: User
     featuredProduct: Product
     randomNumbers: [Int!]!
+    users: [User]
   }
 `;
 
@@ -63,10 +80,12 @@ const resolvers = {
       percentageDiscount: 0.5,
     }),
 
-    randomNumbers: () => new Array(6)
-      .fill()
-      .map(() => Math.floor(Math.random() * 61))
+    randomNumbers: () => new Array(6).fill()
+      .map(() => Math
+        .floor(Math.random() * 61))
       .sort((a, b) => a - b),
+
+    users: () => users,
   },
 };
 
