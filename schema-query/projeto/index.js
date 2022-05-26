@@ -4,10 +4,20 @@ const typeDefs = gql`
 # Novo tipo scalar
 scalar Date
 # Pontos de entrada da sua API
+  type User {
+    id: ID
+    name: String
+    email: String
+    age: Int
+    salary: Float
+    vip: Boolean  
+  }
+
   type Query {
-    hello: String
-    currentTime: String
-    date: Date
+    hello: String!
+    currentTime: String!
+    date: Date!
+    loggedInUser: User
   }
 `;
 
@@ -16,6 +26,14 @@ const resolvers = {
     hello: () => 'return string',
     currentTime: () => new Date().toLocaleTimeString(),
     date: () => new Date(),
+    loggedInUser: () => ({
+      id: '001',
+      name: 'Pedro Mascarenhas',
+      email: 'pedro@mascarenhas.com',
+      age: 26,
+      salary: 1234.30,
+      vip: true,
+    }),
   },
 };
 
