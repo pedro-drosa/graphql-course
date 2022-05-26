@@ -4,6 +4,12 @@ const typeDefs = gql`
 # Novo tipo scalar
 scalar Date
 # Pontos de entrada da sua API
+  type Product {
+    name: String!
+    price: Float!
+    percentageDiscount: Float 
+    discountPrice: Float
+  }
   type User {
     id: ID
     name: String
@@ -18,12 +24,24 @@ scalar Date
     currentTime: String!
     date: Date!
     loggedInUser: User
+    featuredProduct: Product
+
   }
 `;
 
 const resolvers = {
   User: {
     salary: (obj) => obj.real_salary,
+  },
+
+  Product: {
+    discountPrice: (obj) => {
+      if (obj.percentageDiscount) {
+        return obj.price - (obj.price * obj.percentageDiscount);
+      }
+      return obj.price;
+    },
+
   },
 
   Query: {
@@ -37,6 +55,12 @@ const resolvers = {
       age: 26,
       real_salary: 1234.30,
       vip: true,
+    }),
+
+    featuredProduct: () => ({
+      name: 'PC Gamer',
+      price: 4890.89,
+      percentageDiscount: 0.5,
     }),
   },
 };
