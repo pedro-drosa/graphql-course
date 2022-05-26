@@ -22,6 +22,10 @@ scalar Date
 `;
 
 const resolvers = {
+  User: {
+    salary: (obj) => obj.real_salary,
+  },
+
   Query: {
     hello: () => 'return string',
     currentTime: () => new Date().toLocaleTimeString(),
@@ -31,7 +35,7 @@ const resolvers = {
       name: 'Pedro Mascarenhas',
       email: 'pedro@mascarenhas.com',
       age: 26,
-      salary: 1234.30,
+      real_salary: 1234.30,
       vip: true,
     }),
   },
