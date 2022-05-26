@@ -16,6 +16,11 @@ const users = [
 
 ];
 
+const profiles = [
+  { id: 1, name: 'common' },
+  { id: 2, name: 'admiministrator' },
+];
+
 const typeDefs = gql`
 # Novo tipo scalar
 scalar Date
@@ -26,6 +31,12 @@ scalar Date
     percentageDiscount: Float 
     discountPrice: Float
   }
+  
+  type Profile {
+    id: Int
+    name: String
+  }
+
   type User {
     id: Int
     name: String
@@ -44,6 +55,8 @@ scalar Date
     randomNumbers: [Int!]!
     users: [User]
     user(id: Int): User
+    profiles: [Profile]
+    profile(id: Int): Profile
   }
 `;
 
@@ -89,6 +102,12 @@ const resolvers = {
     users: () => users,
     user: (obj, args) => {
       const [filter] = users.filter((user) => user.id === args.id);
+      return filter;
+    },
+
+    profiles: () => profiles,
+    profile: (_, { id }) => {
+      const [filter] = profiles.filter((profile) => profile.id === id);
       return filter;
     },
   },
