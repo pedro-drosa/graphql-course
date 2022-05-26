@@ -27,7 +27,7 @@ scalar Date
     discountPrice: Float
   }
   type User {
-    id: ID
+    id: Int
     name: String
     email: String
     age: Int
@@ -43,6 +43,7 @@ scalar Date
     featuredProduct: Product
     randomNumbers: [Int!]!
     users: [User]
+    user(id: Int): User
   }
 `;
 
@@ -66,7 +67,7 @@ const resolvers = {
     currentTime: () => new Date().toLocaleTimeString(),
     date: () => new Date(),
     loggedInUser: () => ({
-      id: '001',
+      id: 1,
       name: 'Pedro Mascarenhas',
       email: 'pedro@mascarenhas.com',
       age: 26,
@@ -86,6 +87,10 @@ const resolvers = {
       .sort((a, b) => a - b),
 
     users: () => users,
+    user: (obj, args) => {
+      const [filter] = users.filter((user) => user.id === args.id);
+      return filter;
+    },
   },
 };
 
