@@ -25,7 +25,7 @@ scalar Date
     date: Date!
     loggedInUser: User
     featuredProduct: Product
-
+    randomNumbers: [Int!]!
   }
 `;
 
@@ -62,6 +62,11 @@ const resolvers = {
       price: 4890.89,
       percentageDiscount: 0.5,
     }),
+
+    randomNumbers: () => new Array(6)
+      .fill()
+      .map(() => Math.floor(Math.random() * 61))
+      .sort((a, b) => a - b),
   },
 };
 
