@@ -2,16 +2,16 @@ import { ApolloServer, gql } from 'apollo-server';
 
 const users = [
   {
-    id: 1, name: 'Anakin Skywalker', email: 'anakin@skywalker.com', age: 26,
+    id: 1, name: 'Anakin Skywalker', email: 'anakin@skywalker.com', age: 26, profileId: 1,
   },
   {
-    id: 2, name: 'Obi-Wan Kenobi', email: 'obi-Wan@Kenobi.com', age: 36,
+    id: 2, name: 'Obi-Wan Kenobi', email: 'obi-Wan@Kenobi.com', age: 36, profileId: 2,
   },
   {
-    id: 3, name: 'Luke Skywalker', email: 'luke@skywalker.com', age: 19,
+    id: 3, name: 'Luke Skywalker', email: 'luke@skywalker.com', age: 19, profileId: 1,
   },
   {
-    id: 4, name: 'Han Solo', email: 'han@solo.com', age: 19,
+    id: 4, name: 'Han Solo', email: 'han@solo.com', age: 19, profileId: 2,
   },
 
 ];
@@ -31,7 +31,7 @@ scalar Date
     percentageDiscount: Float 
     discountPrice: Float
   }
-  
+
   type Profile {
     id: Int
     name: String
@@ -43,7 +43,8 @@ scalar Date
     email: String
     age: Int
     salary: Float
-    vip: Boolean  
+    vip: Boolean
+    profile: Profile  
   }
 
   type Query {
@@ -63,6 +64,10 @@ scalar Date
 const resolvers = {
   User: {
     salary: (obj) => obj.real_salary,
+    profile: (obj) => {
+      const [filter] = profiles.filter((profile) => profile.id === obj.profileId);
+      return filter;
+    },
   },
 
   Product: {
