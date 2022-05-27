@@ -1,0 +1,6 @@
+type Product {
+  name: String!
+  price: Float!
+  percentageDiscount: Float 
+  discountPrice: Float
+}
