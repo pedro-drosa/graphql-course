@@ -9,6 +9,8 @@ const findProfileIndex = (filter) => {
 
 export default {
   newProfile: (_, { data }) => {
+    const existingProfile = profiles.some((some) => some.name === data.name);
+    if (existingProfile) throw new Error('Profile already registered');
     profiles.push({ id: profiles.length + 1, name: data.name });
     return profiles[profiles.length - 1];
   },
