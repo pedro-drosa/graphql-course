@@ -14,4 +14,11 @@ export default {
     users.push(newUser);
     return newUser;
   },
+
+  deleteUSer: (_, { id }) => {
+    const indexExists = users.findIndex((user) => user.id === id);
+    if (indexExists < 0) return null;
+    const [deletedUSer] = users.splice(indexExists, 1);
+    return deletedUSer;
+  },
 };
