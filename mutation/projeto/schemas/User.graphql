@@ -9,6 +9,7 @@ input ProfileInput {
 
 input ProfileFilterInput {
   id: Int
+  name: String
 }
 
 enum StatusEnum {

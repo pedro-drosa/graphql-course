@@ -2,8 +2,9 @@ import { profiles } from '../../data/db';
 
 const findProfileIndex = (filter) => {
   if (!filter) return -1;
-  const { id } = filter;
+  const { id, name } = filter;
   if (id) return profiles.findIndex((profile) => profile.id === id);
+  if (name) return profiles.findIndex((profile) => profile.name === name);
   return -1;
 };
 
