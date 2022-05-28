@@ -1,4 +1,4 @@
-import { nextId, users } from '../data/db';
+import { nextId, users } from '../../data/db';
 
 const findUserIndex = (filter) => {
   if (!filter) return -1;
