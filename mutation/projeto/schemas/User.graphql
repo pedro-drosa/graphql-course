@@ -3,6 +3,10 @@ type Profile {
   name: String
 }
 
+input ProfileInput {
+  name: String
+}
+
 enum StatusEnum {
   ACTIVE
   INACTIVE 
