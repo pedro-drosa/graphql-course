@@ -22,11 +22,11 @@ export default {
     return newUser;
   },
 
-  deleteUSer: (_, { filter }) => {
+  deleteUser: (_, { filter }) => {
     const indexExists = findUserIndex(filter);
     if (indexExists < 0) return null;
-    const [deletedUSer] = users.splice(indexExists, 1);
-    return deletedUSer;
+    const [deletedUser] = users.splice(indexExists, 1);
+    return deletedUser;
   },
 
   changeUser: (_, { filter, data }) => {
