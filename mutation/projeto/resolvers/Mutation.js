@@ -1,12 +1,13 @@
 import { nextId, users } from '../data/db';
 
 export default {
-  newUser: (obj, { name, email, age }) => {
+  newUser: (_, args) => {
+    const existingEmail = users.some(((user) => user.email === args.email));
+    if (existingEmail) throw new Error('Email already registered');
+
     const newUser = {
       id: nextId(),
-      name,
-      email,
-      age,
+      ...args,
       profileId: 1,
       status: 'ACTIVE',
     };
