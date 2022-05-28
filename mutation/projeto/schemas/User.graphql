@@ -7,6 +7,10 @@ input ProfileInput {
   name: String
 }
 
+input ProfileFilterInput {
+  id: Int
+}
+
 enum StatusEnum {
   ACTIVE
   INACTIVE 
