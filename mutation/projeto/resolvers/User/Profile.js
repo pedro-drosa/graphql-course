@@ -1,4 +1,4 @@
-import { profiles } from '../data/db';
+import { profiles } from '../../data/db';
 
 export default {
   profile: (obj) => {
