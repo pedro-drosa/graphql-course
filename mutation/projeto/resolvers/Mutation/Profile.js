@@ -18,4 +18,15 @@ export default {
     const [deletedProfile] = profiles.splice(indexExists, 1);
     return deletedProfile;
   },
+
+  changeProfile: (_, { filter, data }) => {
+    const indexExists = findProfileIndex(filter);
+    if (indexExists < 0) return null;
+    const updatedProfile = {
+      ...profiles[indexExists],
+      ...data,
+    };
+    profiles.splice(indexExists, 1, updatedProfile);
+    return updatedProfile;
+  },
 };
