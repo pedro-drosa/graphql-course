@@ -29,12 +29,12 @@ export default {
     return deletedUSer;
   },
 
-  changeUser: (_, args) => {
-    const indexExists = users.findIndex((user) => user.id === args.id);
+  changeUser: (_, { filter, data }) => {
+    const indexExists = findUserIndex(filter);
     if (indexExists < 0) return null;
     const updatedUser = {
       ...users[indexExists],
-      ...args,
+      ...data,
     };
     users.splice(indexExists, 1, updatedUser);
     return updatedUser;
